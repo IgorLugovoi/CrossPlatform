@@ -1,0 +1,18 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Solution Condition="'$(Solution)' == ''">Lab</Solution>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Solution)' != ''">
+    <ProjectFile Include="Lab1\Lab.csproj"/>
+  </ItemGroup>
+  <Target Name="Build">
+    <MSBuild Projects="@(ProjectFile)" Targets="Restore;Build"/>
+  </Target>
+  <Target Name="Run">
+    <PropertyGroup>
+      <MainProject>Lab.csproj</MainProject>
+    </PropertyGroup>
+    <Exec Command="dotnet run --project &quot;$(MainProject)&quot;" WorkingDirectory="Lab1"/>
+  </Target>
+</Project>
