@@ -1,32 +1,47 @@
 ﻿namespace Lab
 {
-    internal class Task
+    public class Task1
     {
         public static CircularLinkedList<int> arr = new CircularLinkedList<int>();
         public static int n = 7;//n - кількість коробок
         public static int totalStepsCounter = 0;
         public void TaskSolution()
         {
-            // Читаємо дані з файлу input.txt
             string[] input = File.ReadAllLines("input.txt");
 
-            // Перший рядок — це кількість коробок
             n = int.Parse(input[0]);
 
-            // Другий рядок — це кульки в коробках
-            string[] balls = input[1].Split(' ');
+            if (n < 1 || n > 1000)
+            {
+                throw new ArgumentException("The number of boxes should be within the limits 1 ≤ N ≤ 1000");
+            }
 
-            // Додаємо кульки в круговий список
+            string[] balls = input[1].Split(' ');
+ 
+            if (balls.Length != n)
+            {
+                throw new ArgumentException("The number of elements in the second line must be equal N");
+            }
+
+            int sum = 0;
+
             foreach (string ball in balls)
             {
-                arr.Add(int.Parse(ball));
+                int ballCount = int.Parse(ball);
+
+                if (ballCount < 0 || ballCount > n)
+                {
+                    throw new ArgumentException("The number of balls in each box must be within the limits 0 ≤ Ai ≤ N");
+                }
+
+                arr.Add(ballCount);
+                sum += ballCount;
             }
 
 
-            // Додаємо кульки в круговий список
-            foreach (string ball in balls)
+            if (sum != n)
             {
-                arr.Add(int.Parse(ball));
+                throw new ArgumentException("Sum of balls must = N");
             }
 
             bool balanced = false;
@@ -38,18 +53,19 @@
                 {
                     int currentBalls = arr.GetNodeData(i);
 
-                    // Якщо в коробці більше 1 кулі треба змістити кульки
+                    // Якщо в коробці більше 1 кулі, треба змістити кульки
                     if (currentBalls > 1)
                     {
-                        balanced = false;  //Треба переносити кульку
+                        balanced = false; // Треба переносити кульку
                         FindClosestEmptyNode(i);
                     }
                 }
             }
+
             File.WriteAllText("output.txt", $"{totalStepsCounter}");
         }
 
-        private void FindClosestEmptyNode(int currentIndex)
+        public void FindClosestEmptyNode(int currentIndex)
         {
             int nextSteps = FindNextEmptyNode(currentIndex);
             int prevSteps = FindPrevEmptyNode(currentIndex);
@@ -62,7 +78,7 @@
                 Move(currentIndex, prevSteps, false);
             }
         }
-        private static int FindNextEmptyNode(int currentIndex)
+        public static int FindNextEmptyNode(int currentIndex)
         {
             int nextSteps = 0;
             int index = currentIndex;
@@ -75,7 +91,7 @@
 
             return nextSteps;
         }
-        private static int FindPrevEmptyNode(int currentIndex)
+        public static int FindPrevEmptyNode(int currentIndex)
         {
             int prevSteps = 0;
             int index = currentIndex;
@@ -87,7 +103,7 @@
             while (arr.GetNodeData(index) != 0 && prevSteps < arr.Count);
             return prevSteps;
         }
-        private void Move(int currentIndex, int steps, bool rotation)
+        public void Move(int currentIndex, int steps, bool rotation)
         {
 
             arr.SetNodeData(currentIndex, arr.GetNodeData(currentIndex) - 1);
