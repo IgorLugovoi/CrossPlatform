@@ -1,4 +1,4 @@
-﻿namespace Lab
+﻿namespace Lab1
 {
     public class Task1
     {
@@ -7,7 +7,7 @@
         public static int totalStepsCounter = 0;
         public void TaskSolution()
         {
-            string[] input = File.ReadAllLines("input.txt");
+            string[] input = File.ReadAllLines(@"Lab1\input.txt");
 
             n = int.Parse(input[0]);
 
@@ -62,7 +62,7 @@
                 }
             }
 
-            File.WriteAllText("output.txt", $"{totalStepsCounter}");
+            File.WriteAllText(@"Lab1\output.txt", $"{totalStepsCounter}");
         }
 
         public void FindClosestEmptyNode(int currentIndex)

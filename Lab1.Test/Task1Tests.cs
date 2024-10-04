@@ -1,7 +1,5 @@
 ﻿using NUnit.Framework;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
-using Lab;
-using System.IO;
 
 namespace Lab1.Test
 {

@@ -1,26 +1,24 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Solution Condition="'$(Solution)' == ''">Lab</Solution>
+    <Solution Condition="'$(Solution)' == ''"></Solution>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Solution)' != ''">
-    <ProjectFile Include="Lab1\Lab.csproj"/>
-    <ProjectFile Include="Lab1.Test\Lab1.Test.csproj"/>
+    <MainProjectFile Include="$(Solution)\$(Solution).csproj" />
+    <TestProjectFile Include="$(Solution).Test\$(Solution).Test.csproj" />
   </ItemGroup>
 
   <Target Name="Build">
-    <MSBuild Projects="@(ProjectFile)" Targets="Restore;Build"/>
+    <MSBuild Projects="@(MainProjectFile);@(TestProjectFile)" Targets="Restore;Build" />
+  </Target>
+
+  <Target Name="Test">
+    <Exec Command="dotnet test @(TestProjectFile) --logger &quot;console;verbosity=detailed&quot;" />
   </Target>
 
   <Target Name="Run">
-    <PropertyGroup>
-      <MainProject>Lab.csproj</MainProject>
-    </PropertyGroup>
-    <Exec Command="dotnet run --project &quot;$(MainProject)&quot;" WorkingDirectory="Lab1"/>
+    <Exec Command="dotnet run --project &quot;@(MainProjectFile)&quot;" />
   </Target>
 
-   <Target Name="Test">
-        <Exec Command="dotnet test --logger &quot;console;verbosity=detailed&quot;" WorkingDirectory="Lab1.Test"/>
-    </Target>
 </Project>
