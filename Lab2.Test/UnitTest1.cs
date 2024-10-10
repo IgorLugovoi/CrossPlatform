@@ -12,7 +12,7 @@ namespace Lab2.Test
             int[] diagonal = { 5 };
             var task = new Task2(N, diagonal);
             int result = task.Minimax(N - 1, 0, true);
-            Assert.AreEqual(5, result); // Оскільки на дошці тільки один елемент на діагоналі
+            Assert.That(result, Is.EqualTo(5)); // Оскільки на дошці тільки один елемент на діагоналі
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace Lab2.Test
             int[] diagonal = { 3, 7 };
             var task = new Task2(N, diagonal);
             int result = task.Minimax(N - 1, 0, true);
-            Assert.AreEqual(7, result);
+            Assert.That(result, Is.EqualTo(7));
         }
 
 
@@ -34,7 +34,7 @@ namespace Lab2.Test
             int[] diagonal = { 100 };
             var task = new Task2(N, diagonal);
             int result = task.Minimax(N - 1, 0, true);
-            Assert.AreEqual(100, result);
+            Assert.That(result, Is.EqualTo(100));
         }
         [Test]
         public void Test_Minimax_When3ElemOnDiagonal()
@@ -43,7 +43,7 @@ namespace Lab2.Test
             int[] diagonal = { 5, 3, 1 };
             var task = new Task2(N, diagonal);
             int result = task.Minimax(N - 1, 0, true);
-            Assert.AreEqual(3, result); 
+            Assert.That(result, Is.EqualTo(3)); 
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace Lab2.Test
             int[] diagonal = { 4, 7, 2, 9 };
             var task = new Task2(N, diagonal);
             int result = task.Minimax(N - 1, 0, true);
-            Assert.AreEqual(7, result);
+            Assert.That(result, Is.EqualTo(7));
         }
     }
 }
