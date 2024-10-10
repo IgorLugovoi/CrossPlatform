@@ -13,3 +13,11 @@ dotnet build Build.proj -p:Solution=Lab2 -t:Build
 dotnet build Build.proj -p:Solution=Lab2 -t:Run
 
 dotnet build Build.proj -p:Solution=Lab2 -t:Test
+
+Список команд для 3 лр
+
+dotnet build Build.proj -p:Solution=Lab3 -t:Build
+
+dotnet build Build.proj -p:Solution=Lab3 -t:Run
+
+dotnet build Build.proj -p:Solution=Lab3 -t:Test
