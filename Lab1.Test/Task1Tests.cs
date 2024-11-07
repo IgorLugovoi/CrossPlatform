@@ -16,11 +16,10 @@ namespace Lab1.Test
             Task1 task = new Task1();
 
             
-            task.TaskSolution();
-            string output = File.ReadAllText("output.txt");
+            int result = task.TaskSolution();
 
             
-            Assert.AreEqual("2", output);// Очікуємо, що потрібно 2 кроки для балансування кульок
+            Assert.AreEqual(2, result);// Очікуємо, що потрібно 2 кроки для балансування кульок
         }
 
         [Test] 

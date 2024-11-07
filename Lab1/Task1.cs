@@ -5,7 +5,7 @@
         public static CircularLinkedList<int> arr = new CircularLinkedList<int>();
         public static int n = 7;//n - кількість коробок
         public static int totalStepsCounter = 0;
-        public void TaskSolution()
+        public int TaskSolution()
         {
             string[] input = File.ReadAllLines(@"Lab1\input.txt");
 
@@ -61,10 +61,9 @@
                     }
                 }
             }
-
-            File.WriteAllText(@"Lab1\output.txt", $"{totalStepsCounter}");
+            return totalStepsCounter;
+            //File.WriteAllText(@"Lab1\output.txt", $"{totalStepsCounter}");
         }
-
         public void FindClosestEmptyNode(int currentIndex)
         {
             int nextSteps = FindNextEmptyNode(currentIndex);

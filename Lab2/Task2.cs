@@ -12,7 +12,7 @@
         }
         public Task2() { }
 
-        public void Start()
+        public int Start()
         {
             string[] lines = File.ReadAllLines(@"Lab2\input.txt");
             N = int.Parse(lines[0]); // Розмір дошки
@@ -23,7 +23,8 @@
             // Початкова позиція пішака (лівий нижній кут)
             int result = Minimax(N - 1, 0, true);
 
-            File.WriteAllText(@"Lab2\output.txt", result.ToString());
+            return result;
+            //File.WriteAllText(@"Lab2\output.txt", result.ToString());
         }
 
         public void FillBoard(int[] a)
