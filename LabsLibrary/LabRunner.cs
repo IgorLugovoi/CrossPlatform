@@ -8,9 +8,9 @@ namespace LabsLibrary
         public void RunLab1(string inputFilePath, string outputFilePath)
         {
             Task1 task1 = new Task1();
-            int result = task1.TaskSolution();
+            string result = task1.TaskSolution().ToString();
 
-            File.WriteAllText(outputFilePath, result.ToString());
+            File.WriteAllText(outputFilePath, result);
 
             Console.WriteLine("Data successfully written to the output file.");
         }
@@ -19,9 +19,9 @@ namespace LabsLibrary
         {
             Task2 task2 = new Task2();
 
-            int result = task2.Start();
+            string result = task2.Start().ToString();
 
-            File.WriteAllText(outputFilePath, result.ToString());
+            File.WriteAllText(outputFilePath, result);
 
             Console.WriteLine("Data successfully written to the output file.");
         }
@@ -30,11 +30,13 @@ namespace LabsLibrary
         {
             Task3 task3 = new Task3();
 
-            int result = task3.ExecuteTask();
+            string result = task3.ExecuteTask().ToString();
 
-            File.WriteAllText(outputFilePath, result.ToString());
+            File.WriteAllText(outputFilePath, result);
 
             Console.WriteLine("Data successfully written to the output file.");
         }
+
+
     }
 }
