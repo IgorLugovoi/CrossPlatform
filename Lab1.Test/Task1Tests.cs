@@ -16,7 +16,7 @@ namespace Lab1.Test
             Task1 task = new Task1();
 
             
-            int result = task.TaskSolution();
+            int result = task.TaskSolution(input);
 
             
             Assert.AreEqual(2, result);// Очікуємо, що потрібно 2 кроки для балансування кульок

@@ -38,9 +38,10 @@
     <button type="submit" class="btn btn-primary">Завантажити та виконати</button>
 </form>
 
-@if (ViewData["Message"] != null)
+@if (ViewData["Result"] != null)
 {
-    <div class="alert alert-info">
-        @ViewData["Message"]
+    <div class="alert alert-success">
+        <strong>Результат обробки:</strong>
+        <pre>@ViewData["Result"]</pre>
     </div>
 }

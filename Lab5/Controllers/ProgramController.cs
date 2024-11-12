@@ -26,27 +26,22 @@ namespace Lab5.Controllers
         {
             if (file != null && file.Length > 0)
             {
-                // Зберігаємо завантажений файл на сервері
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", file.FileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                using (var memoryStream = new MemoryStream())
                 {
-                    file.CopyTo(stream);
+                    // Copy the file's data to memory
+                    file.CopyTo(memoryStream);
+                    memoryStream.Seek(0, SeekOrigin.Begin); // Reset stream position
+
+                    // Process the file in memory
+                    var result = _labRunner.RunLab1(memoryStream);
+
+                    // Display result
+                    ViewData["Result"] = result;
                 }
-
-                // Викликаємо метод з LabsLibrary для обробки файлу
-                string outputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "outputLab1.txt");
-                _labRunner.RunLab1(filePath, outputFilePath);
-
-                // Читаємо результат і передаємо на представлення
-                string result = System.IO.File.ReadAllText(outputFilePath);
-                ViewData["Result"] = result;
             }
 
-            return View();
+            return View("~/Views/Labs/RunLab1.cshtml");
         }
-
-        // Аналогічно для RunLab2 та RunLab3
         [HttpGet]
         public IActionResult RunLab2()
         {
@@ -58,21 +53,21 @@ namespace Lab5.Controllers
         {
             if (file != null && file.Length > 0)
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", file.FileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                using (var memoryStream = new MemoryStream())
                 {
-                    file.CopyTo(stream);
+                    // Копіюємо дані файлу в пам'ять
+                    file.CopyTo(memoryStream);
+                    memoryStream.Seek(0, SeekOrigin.Begin); // Повертаємо позицію потоку на початок
+
+                    // Викликаємо метод обробки файлу у пам'яті
+                    var result = _labRunner.RunLab2(memoryStream);
+
+                    // Передаємо результат на представлення
+                    ViewData["Result"] = result;
                 }
-
-                string outputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "outputLab2.txt");
-                _labRunner.RunLab2(filePath, outputFilePath);
-
-                string result = System.IO.File.ReadAllText(outputFilePath);
-                ViewData["Result"] = result;
             }
 
-            return View();
+            return View("~/Views/Labs/RunLab2.cshtml");
         }
 
         [HttpGet]
@@ -86,21 +81,17 @@ namespace Lab5.Controllers
         {
             if (file != null && file.Length > 0)
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", file.FileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                using (var memoryStream = new MemoryStream())
                 {
-                    file.CopyTo(stream);
+                    file.CopyTo(memoryStream);
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+
+                    var result = _labRunner.RunLab3(memoryStream);
+                    ViewData["Result"] = result;
                 }
-
-                string outputFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "outputLab3.txt");
-                _labRunner.RunLab3(filePath, outputFilePath);
-
-                string result = System.IO.File.ReadAllText(outputFilePath);
-                ViewData["Result"] = result;
             }
 
-            return View();
+            return View("~/Views/Labs/RunLab3.cshtml");
         }
     }
 }
