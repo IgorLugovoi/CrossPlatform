@@ -2,6 +2,7 @@
 using Lab5.Models;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lab5.Controllers
 {
@@ -13,7 +14,7 @@ namespace Lab5.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var user = await _context.Users

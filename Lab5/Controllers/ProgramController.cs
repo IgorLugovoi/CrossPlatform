@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lab5.Controllers
 {
@@ -15,12 +16,13 @@ namespace Lab5.Controllers
         }
 
         // Сторінка для Lab1
+        [Authorize]
         [HttpGet]
         public IActionResult RunLab1()
         {
             return View("~/Views/Labs/RunLab1.cshtml");
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult RunLab1(IFormFile file)
         {
@@ -42,12 +44,13 @@ namespace Lab5.Controllers
 
             return View("~/Views/Labs/RunLab1.cshtml");
         }
+        [Authorize]
         [HttpGet]
         public IActionResult RunLab2()
         {
             return View("~/Views/Labs/RunLab2.cshtml");
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult RunLab2(IFormFile file)
         {
@@ -69,13 +72,13 @@ namespace Lab5.Controllers
 
             return View("~/Views/Labs/RunLab2.cshtml");
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult RunLab3()
         {
             return View("~/Views/Labs/RunLab3.cshtml");
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult RunLab3(IFormFile file)
         {
